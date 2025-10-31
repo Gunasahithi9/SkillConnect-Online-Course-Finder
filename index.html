@@ -1,90 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Delicious Recipe Book</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css folder/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillConnect: Online Course Finder | Internship Project</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.3rem;
+    }
+    header p {
+      font-size: 1.1rem;
+    }
+    nav {
+      background-color: #222;
+      text-align: center;
+      padding: 12px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc00;
+    }
+    section {
+      padding: 25px;
+      margin: 20px auto;
+      max-width: 900px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+    form {
+      max-width: 650px;
+      margin: 25px auto;
+    }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    form button {
+      background-color: #007bff;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Delicious Recipe Book</h1>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#recipes">Recipes</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1>SkillConnect: Online Course Finder</h1>
+    <p>An Internship Project by <strong>S. Guna Sahithi (1601-22-771-020)</strong></p>
+    <p>Department of Artificial Intelligence and Data Science, CBIT Hyderabad</p>
   </header>
 
-  <section id="home" class="hero-section">
-    <div class="container">
-      <h2>Welcome to Your Ultimate Recipe Collection</h2>
-      <p>Discover tasty, easy-to-make recipes for every occasion. Cook with love!</p>
-      <button id="random-button" class="btn-primary">Get Random Recipe</button>
-    </div>
+  <nav>
+    <a href="#about">About</a> |
+    <a href="#objectives">Objectives</a> |
+    <a href="#features">Features</a> |
+    <a href="#technologies">Technologies</a> |
+    <a href="#results">Results</a> |
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About the Project</h2>
+    <p><strong>SkillConnect</strong> is a web application developed using <b>React.js</b> that allows users to 
+      discover, compare, and explore online courses across multiple platforms. 
+      It was created to simplify the search for suitable online learning opportunities 
+      based on users’ skill levels, interests, and goals.</p>
+    <p>The project was completed as part of the internship requirement under the guidance of 
+      <b>Dr. P. Srilatha</b>, Associate Professor, Department of AI & DS, 
+      <b>Chaitanya Bharathi Institute of Technology (CBIT), Hyderabad</b>.</p>
   </section>
 
-  <section id="recipes" class="container recipe-finder-container">
-    <h2>Find a Recipe</h2>
-
-    <form id="search-form" class="search-box">
-      <input type="text" id="search-input" placeholder="Search by name (e.g., 'carrot')" />
-      <button type="submit" id="search-button">Search</button>
-    </form>
-
-    <div class="message" id="message-area">
-      Search for a recipe or get a random one!
-    </div>
-
-    <div class="results-grid" id="results-grid"></div>
+  <section id="objectives">
+    <h2>Project Objectives</h2>
+    <ul>
+      <li>Develop a responsive front-end web application using React.js.</li>
+      <li>Implement keyword-based search and filtering for courses.</li>
+      <li>Integrate real-time course data dynamically via APIs.</li>
+      <li>Apply modular, reusable component architecture for scalability.</li>
+      <li>Enhance user experience through clean UI and intuitive navigation.</li>
+    </ul>
   </section>
 
-  <!-- Modal -->
-  <div class="modal-container hidden" id="recipe-modal">
-    <div class="modal-content">
-      <button id="modal-close-btn" class="modal-close-btn">+</button>
-      <div id="recipe-details-content"></div>
-    </div>
-  </div>
-
-  <section id="about" class="container about-section">
-    <h2>About Us</h2>
-    <p>
-      We believe cooking is an art and a joy. Our recipe book brings you delicious, easy-to-follow recipes for home cooks of all levels. Whether you want comfort food or a quick snack, we’ve got you covered!
-    </p>
+  <section id="features">
+    <h2>Core Features</h2>
+    <ul>
+      <li>Search courses by keywords or topics.</li>
+      <li>Filter by category, difficulty, and duration.</li>
+      <li>Responsive layout compatible across devices.</li>
+      <li>Dynamic API data fetching with optimized loading.</li>
+      <li>Minimalist and intuitive interface design.</li>
+    </ul>
   </section>
 
-  <section id="contact" class="container contact-section">
-    <h2>Contact Us</h2>
-    <p>Have questions or want to share your recipe? Reach out!</p>
+  <section id="technologies">
+    <h2>Tools & Technologies Used</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Tools/Technologies</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frontend</td>
+          <td>React.js, HTML5, CSS3, JavaScript (ES6)</td>
+        </tr>
+        <tr>
+          <td>Frameworks</td>
+          <td>React Router, Bootstrap</td>
+        </tr>
+        <tr>
+          <td>APIs</td>
+          <td>REST API Integration (Mock/Public APIs)</td>
+        </tr>
+        <tr>
+          <td>Version Control</td>
+          <td>Git, GitHub</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="results">
+    <h2>Results & Learning Outcomes</h2>
+    <ul>
+      <li>Created a fully functional responsive interface with smooth navigation.</li>
+      <li>Achieved API-driven data rendering with minimal load times.</li>
+      <li>Developed proficiency in React components, hooks, and state management.</li>
+      <li>Gained experience in UI/UX design and front-end performance optimization.</li>
+    </ul>
+    <p><b>Future Enhancements:</b> Include user authentication, personalized dashboards, 
+      and AI-based course recommendations.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
     <form>
-      <label for="name">Name:</label><br />
-      <input type="text" id="name" name="name" placeholder="Your name" required /><br />
-      
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" placeholder="Your email" required /><br />
-      
-      <label for="message">Message:</label><br />
-      <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea><br />
-      
-      <button type="submit" class="btn-primary">Send</button>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Send</button>
     </form>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Delicious Recipe Book. All rights reserved.</p>
-  </footer>
-
-  <script src="main.js"></script>
 </body>
 </html>
