@@ -1,208 +1,347 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillConnect: Online Course Finder | Internship Project</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SkillConnect — Online Course Finder (HTML/CSS)</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f6f9;
-      color: #333;
+    /* ---------- Base ---------- */
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --muted:#6b7280; --accent:#2563eb; --glass: rgba(255,255,255,0.6);
+      --radius:14px; --max-width:1100px; --gap:18px;
     }
-    header {
-      background-color: #007bff;
-      color: white;
-      padding: 25px 0;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.3rem;
-    }
-    header p {
-      font-size: 1.1rem;
-    }
-    nav {
-      background-color: #222;
-      text-align: center;
-      padding: 12px 0;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #ffcc00;
-    }
-    section {
-      padding: 25px;
-      margin: 20px auto;
-      max-width: 900px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    section h2 {
-      color: #007bff;
-      margin-bottom: 15px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-    table th, table td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-    table th {
-      background-color: #f1f1f1;
-      color: #333;
-    }
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    form {
-      max-width: 650px;
-      margin: 25px auto;
-    }
-    form input, form textarea, form button {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    form button {
-      background-color: #007bff;
-      color: white;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    form button:hover {
-      background-color: #0056b3;
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:linear-gradient(180deg,#eef2ff 0%,#f6f7fb 100%); color:#0f172a}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max-width); margin:28px auto; padding:20px}
+
+    /* ---------- Header ---------- */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.tag{margin:0;color:var(--muted);font-size:13px}
+
+    /* ---------- Search & Filters ---------- */
+    .topbar{display:flex;gap:16px;align-items:center;margin:18px 0}
+    .search{flex:1;display:flex;gap:8px;align-items:center}
+    .search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e6e9ef;background:var(--card)}
+    .filters{display:flex;gap:8px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid #dbeafe;color:var(--accent)}
+
+    /* ---------- Layout ---------- */
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:var(--gap)}
+
+    /* ---------- Sidebar ---------- */
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 6px 18px rgba(18,24,40,0.04)}
+    .sidebar h3{margin-top:0}
+    .filters-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+    .filters-list label{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+    input[type="checkbox"]{width:16px;height:16px}
+
+    /* ---------- Course grid ---------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .course{background:var(--card);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow:0 6px 18px rgba(18,24,40,0.04)}
+    .thumb{height:120px;border-radius:10px;background:linear-gradient(135deg,#60a5fa,#7c3aed);display:flex;align-items:end;justify-content:flex-start;padding:10px;color:white;font-weight:600}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .title{font-weight:600;font-size:15px}
+    .instructor{font-size:13px;color:var(--muted)}
+    .chip{font-size:12px;padding:6px 8px;border-radius:999px;background:#eef2ff;color:var(--accent)}
+
+    /* ---------- Details (CSS-only modal using :target) ---------- */
+    .details{position:fixed;right:0;top:0;height:100vh;width:420px;background:linear-gradient(180deg,#fff,#f8fafc);box-shadow:-18px 0 40px rgba(2,6,23,0.08);padding:22px;transform:translateX(110%);transition:transform .28s ease;overflow:auto}
+    .details:target{transform:translateX(0)}
+    .close{display:inline-block;margin-bottom:8px}
+    .detail-thumb{height:160px;border-radius:10px;display:flex;align-items:end;padding:12px;color:white;font-weight:700}
+    .meta-row{display:flex;gap:10px;align-items:center;margin-top:10px}
+    .desc{color:#334155;margin-top:14px;line-height:1.5}
+
+    /* ---------- Footer ---------- */
+    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{order:2}
+      .details{width:100%}
+      .thumb{height:100px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>SkillConnect: Online Course Finder</h1>
-    <p>An Internship Project by <strong>S. Guna Sahithi (1601-22-771-020)</strong></p>
-    <p>Department of Artificial Intelligence and Data Science, CBIT Hyderabad</p>
-  </header>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">SC</div>
+        <div>
+          <h1>SkillConnect</h1>
+          <p class="tag">Find, compare & explore online courses</p>
+        </div>
+      </div>
+      <div>
+        <a class="btn" href="#about">About</a>
+      </div>
+    </header>
 
-  <nav>
-    <a href="#about">About</a> |
-    <a href="#objectives">Objectives</a> |
-    <a href="#features">Features</a> |
-    <a href="#technologies">Technologies</a> |
-    <a href="#results">Results</a> |
-    <a href="#contact">Contact</a>
-  </nav>
+    <div class="topbar">
+      <div class="search">
+        <input placeholder="Search courses, topics, instructors... (static search)" aria-label="search" />
+        <button class="btn secondary">Search</button>
+      </div>
+      <div class="filters">
+        <button class="btn secondary">Filters</button>
+        <button class="btn">Explore</button>
+      </div>
+    </div>
 
-  <section id="about">
-    <h2>About the Project</h2>
-    <p><strong>SkillConnect</strong> is a web application developed using <b>React.js</b> that allows users to 
-      discover, compare, and explore online courses across multiple platforms. 
-      It was created to simplify the search for suitable online learning opportunities 
-      based on users’ skill levels, interests, and goals.</p>
-    <p>The project was completed as part of the internship requirement under the guidance of 
-      <b>Dr. P. Srilatha</b>, Associate Professor, Department of AI & DS, 
-      <b>Chaitanya Bharathi Institute of Technology (CBIT), Hyderabad</b>.</p>
-  </section>
+    <main class="layout">
+      <aside class="sidebar card">
+        <h3>Filters</h3>
+        <div class="filters-list">
+          <label><input type="checkbox"/> Programming</label>
+          <label><input type="checkbox"/> Data Science</label>
+          <label><input type="checkbox"/> Design</label>
+          <label><input type="checkbox"/> Business</label>
+        </div>
 
-  <section id="objectives">
-    <h2>Project Objectives</h2>
-    <ul>
-      <li>Develop a responsive front-end web application using React.js.</li>
-      <li>Implement keyword-based search and filtering for courses.</li>
-      <li>Integrate real-time course data dynamically via APIs.</li>
-      <li>Apply modular, reusable component architecture for scalability.</li>
-      <li>Enhance user experience through clean UI and intuitive navigation.</li>
-    </ul>
-  </section>
+        <h3 style="margin-top:18px">Difficulty</h3>
+        <div class="filters-list">
+          <label><input type="checkbox"/> Beginner</label>
+          <label><input type="checkbox"/> Intermediate</label>
+          <label><input type="checkbox"/> Advanced</label>
+        </div>
 
-  <section id="features">
-    <h2>Core Features</h2>
-    <ul>
-      <li>Search courses by keywords or topics.</li>
-      <li>Filter by category, difficulty, and duration.</li>
-      <li>Responsive layout compatible across devices.</li>
-      <li>Dynamic API data fetching with optimized loading.</li>
-      <li>Minimalist and intuitive interface design.</li>
-    </ul>
-  </section>
+        <h3 style="margin-top:18px">Duration</h3>
+        <div class="filters-list">
+          <label><input type="checkbox"/> &lt; 5 hours</label>
+          <label><input type="checkbox"/> 5 - 20 hours</label>
+          <label><input type="checkbox"/> &gt; 20 hours</label>
+        </div>
 
-  <section id="technologies">
-    <h2>Tools & Technologies Used</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Tools/Technologies</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Frontend</td>
-          <td>React.js, HTML5, CSS3, JavaScript (ES6)</td>
-        </tr>
-        <tr>
-          <td>Frameworks</td>
-          <td>React Router, Bootstrap</td>
-        </tr>
-        <tr>
-          <td>APIs</td>
-          <td>REST API Integration (Mock/Public APIs)</td>
-        </tr>
-        <tr>
-          <td>Version Control</td>
-          <td>Git, GitHub</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+        <p style="margin-top:18px;color:var(--muted);font-size:13px">Note: This demo uses <strong>HTML/CSS only</strong> — search and filters here are visual placeholders. Add JavaScript later for interactivity.</p>
+      </aside>
 
-  <section id="results">
-    <h2>Results & Learning Outcomes</h2>
-    <ul>
-      <li>Created a fully functional responsive interface with smooth navigation.</li>
-      <li>Achieved API-driven data rendering with minimal load times.</li>
-      <li>Developed proficiency in React components, hooks, and state management.</li>
-      <li>Gained experience in UI/UX design and front-end performance optimization.</li>
-    </ul>
-    <p><b>Future Enhancements:</b> Include user authentication, personalized dashboards, 
-      and AI-based course recommendations.</p>
-  </section>
+      <section>
+        <div class="card" style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h2 style="margin:0">Featured Courses</h2>
+            <p style="margin:4px 0 0;color:var(--muted)">Browse curated courses from popular platforms (sample data)</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="chip">8 results</span>
+          </div>
+        </div>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name">
+        <div class="grid">
+          <!-- Course 1 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#06b6d4,#06b6d4)">Intro to Python</div>
+            <div>
+              <div class="title">Python for Everybody</div>
+              <div class="instructor">by J. Smith • Coursera</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Beginner</div>
+              <a href="#course1" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
+          <!-- Course 2 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#7c3aed,#60a5fa)">Data Science</div>
+            <div>
+              <div class="title">Data Analysis with Python</div>
+              <div class="instructor">by A. Lee • Udemy</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Intermediate</div>
+              <a href="#course2" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
 
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="4"></textarea>
+          <!-- Course 3 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#ef4444,#fb923c)">Web</div>
+            <div>
+              <div class="title">Modern HTML & CSS</div>
+              <div class="instructor">by R. Kumar • SkillConnect</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Beginner</div>
+              <a href="#course3" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
 
-      <button type="submit">Send</button>
-    </form>
-  </section>
+          <!-- Course 4 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">ML</div>
+            <div>
+              <div class="title">Intro to Machine Learning</div>
+              <div class="instructor">by S. Patel • edX</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Advanced</div>
+              <a href="#course4" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
 
+          <!-- Course 5 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#60a5fa,#06b6d4)">AI</div>
+            <div>
+              <div class="title">AI for Everyone</div>
+              <div class="instructor">by M. Gomez • Coursera</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Beginner</div>
+              <a href="#course5" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
+
+          <!-- Course 6 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#f472b6,#fb7185)">Design</div>
+            <div>
+              <div class="title">UI/UX Fundamentals</div>
+              <div class="instructor">by Nina • Udemy</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Intermediate</div>
+              <a href="#course6" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
+
+          <!-- Course 7 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#10b981,#34d399)">Cloud</div>
+            <div>
+              <div class="title">AWS Cloud Practitioner</div>
+              <div class="instructor">by CloudGuru • Pluralsight</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Beginner</div>
+              <a href="#course7" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
+
+          <!-- Course 8 -->
+          <article class="course">
+            <div class="thumb" style="background:linear-gradient(135deg,#fde68a,#f59e0b)">Biz</div>
+            <div>
+              <div class="title">Product Management 101</div>
+              <div class="instructor">by L. Chen • SkillConnect</div>
+            </div>
+            <div class="meta">
+              <div class="chip">Intermediate</div>
+              <a href="#course8" class="btn" style="padding:8px 10px;font-size:13px">View</a>
+            </div>
+          </article>
+        </div>
+
+        <footer>
+          © 2025 SkillConnect — built with HTML & CSS • Demo only
+        </footer>
+      </section>
+    </main>
+
+    <!-- ---------- Details panes (CSS :target) ---------- -->
+    <section id="course1" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#06b6d4,#06b6d4)">Python for Everybody</div>
+        <h2 style="margin-top:12px">Python for Everybody</h2>
+        <div class="meta-row"><div class="instructor">J. Smith • Coursera</div><div class="chip">Beginner</div></div>
+        <p class="desc">A friendly introduction to programming and Python. Covers basics of variables, control flow, functions and data structures with hands-on examples.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 10 hours • <strong>Language:</strong> English</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course2" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#7c3aed,#60a5fa)">Data Analysis with Python</div>
+        <h2 style="margin-top:12px">Data Analysis with Python</h2>
+        <div class="meta-row"><div class="instructor">A. Lee • Udemy</div><div class="chip">Intermediate</div></div>
+        <p class="desc">Covers pandas, NumPy, data cleaning and visualization. Practical projects to build real-world analysis skills.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 25 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course3" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#ef4444,#fb923c)">Modern HTML & CSS</div>
+        <h2 style="margin-top:12px">Modern HTML & CSS</h2>
+        <div class="meta-row"><div class="instructor">R. Kumar • SkillConnect</div><div class="chip">Beginner</div></div>
+        <p class="desc">Practical course on semantic HTML, layouts with Flexbox and Grid, and modern responsive techniques.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 8 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course4" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">Intro to Machine Learning</div>
+        <h2 style="margin-top:12px">Intro to Machine Learning</h2>
+        <div class="meta-row"><div class="instructor">S. Patel • edX</div><div class="chip">Advanced</div></div>
+        <p class="desc">Foundational ML concepts: supervised/unsupervised learning, evaluation metrics, and simple models.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 40 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course5" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#60a5fa,#06b6d4)">AI for Everyone</div>
+        <h2 style="margin-top:12px">AI for Everyone</h2>
+        <div class="meta-row"><div class="instructor">M. Gomez • Coursera</div><div class="chip">Beginner</div></div>
+        <p class="desc">High-level course about AI concepts and business applications — minimal math.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 6 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course6" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#f472b6,#fb7185)">UI/UX Fundamentals</div>
+        <h2 style="margin-top:12px">UI/UX Fundamentals</h2>
+        <div class="meta-row"><div class="instructor">Nina • Udemy</div><div class="chip">Intermediate</div></div>
+        <p class="desc">Principles of design, wireframing, prototyping, and user research techniques.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 12 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course7" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#10b981,#34d399)">AWS Cloud Practitioner</div>
+        <h2 style="margin-top:12px">AWS Cloud Practitioner</h2>
+        <div class="meta-row"><div class="instructor">CloudGuru • Pluralsight</div><div class="chip">Beginner</div></div>
+        <p class="desc">Introductory cloud computing concepts and AWS services overview, suitable for beginners.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 15 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+    <section id="course8" class="details">
+      <a href="#" class="close">◀ Close</a>
+      <div class="card">
+        <div class="detail-thumb" style="background:linear-gradient(135deg,#fde68a,#f59e0b)">Product Management 101</div>
+        <h2 style="margin-top:12px">Product Management 101</h2>
+        <div class="meta-row"><div class="instructor">L. Chen • SkillConnect</div><div class="chip">Intermediate</div></div>
+        <p class="desc">Overview of product lifecycle, stakeholder management, and roadmapping basics.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Duration:</strong> 10 hours</p>
+        <p style="margin-top:10px"><a class="btn" href="#">Go to course page</a></p>
+      </div>
+    </section>
+
+  </div>
 </body>
 </html>
