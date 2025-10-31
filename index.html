@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delicious Recipe Book</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css folder/style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Delicious Recipe Book</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#recipes">Recipes</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero-section">
+    <div class="container">
+      <h2>Welcome to Your Ultimate Recipe Collection</h2>
+      <p>Discover tasty, easy-to-make recipes for every occasion. Cook with love!</p>
+      <button id="random-button" class="btn-primary">Get Random Recipe</button>
+    </div>
+  </section>
+
+  <section id="recipes" class="container recipe-finder-container">
+    <h2>Find a Recipe</h2>
+
+    <form id="search-form" class="search-box">
+      <input type="text" id="search-input" placeholder="Search by name (e.g., 'carrot')" />
+      <button type="submit" id="search-button">Search</button>
+    </form>
+
+    <div class="message" id="message-area">
+      Search for a recipe or get a random one!
+    </div>
+
+    <div class="results-grid" id="results-grid"></div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-container hidden" id="recipe-modal">
+    <div class="modal-content">
+      <button id="modal-close-btn" class="modal-close-btn">+</button>
+      <div id="recipe-details-content"></div>
+    </div>
+  </div>
+
+  <section id="about" class="container about-section">
+    <h2>About Us</h2>
+    <p>
+      We believe cooking is an art and a joy. Our recipe book brings you delicious, easy-to-follow recipes for home cooks of all levels. Whether you want comfort food or a quick snack, we’ve got you covered!
+    </p>
+  </section>
+
+  <section id="contact" class="container contact-section">
+    <h2>Contact Us</h2>
+    <p>Have questions or want to share your recipe? Reach out!</p>
+    <form>
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" placeholder="Your name" required /><br />
+      
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" placeholder="Your email" required /><br />
+      
+      <label for="message">Message:</label><br />
+      <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea><br />
+      
+      <button type="submit" class="btn-primary">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Delicious Recipe Book. All rights reserved.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
